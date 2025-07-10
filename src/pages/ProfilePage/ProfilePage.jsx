@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { getProfile } from "../../api/auth.js";
 import AvatarUploader from "../../componentss/profileInfo/AvatarUploader.jsx";
 import ProfileImageUploader from "../../componentss/profileInfo/ProfileImageUploader.jsx";
+import UpdateProfile from "../../componentss/profileInfo/UpdateProfile.jsx";
 const placeholderImage =
   "https://static.vecteezy.com/system/resources/previews/036/594/092/non_2x/man-empty-avatar-photo-placeholder-for-social-networks-resumes-forums-and-dating-sites-male-and-female-no-photo-images-for-unfilled-user-profile-free-vector.jpg";
 const ProfilePage = () => {
@@ -28,6 +29,9 @@ const ProfilePage = () => {
   useEffect(() => {
     fetchProfile();
   }, []);
+  const closeEditModal = () => {
+    setIsEditing(false);
+  };
 
   const navigate = useNavigate();
   return (
@@ -58,27 +62,10 @@ const ProfilePage = () => {
 
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
             <div className="flex flex-col md:flex-row items-center gap-8">
-              {/* <motion.div whileTap={{ scale: 0.98 }} className="relative group">
-                <img
-                  src={
-                    userData.avatar === "" ? placeholderImage : userData.avatar
-                  }
-                  alt={userData.fullName}
-                  className={`w-64 h-64 rounded  object-cover border border-slate-300 shadow-md`}
-                />
-
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="absolute -bottom-2 -right-2 flex items-center justify-center w-10 h-10 rounded-full bg-white border-2 border-primary/10 cursor-pointer"
-                >
-                  <FaCamera className="text-primary-dark text-lg" />
-                </motion.div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </motion.div> */}
-              {/* <AvatarUploader /> */}
-              <ProfileImageUploader userData={userData} />
+              <ProfileImageUploader
+                fetchProfile={fetchProfile}
+                userData={userData}
+              />
 
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
@@ -116,6 +103,7 @@ const ProfilePage = () => {
             {/* Action Buttons */}
             <motion.div className="flex flex-col sm:flex-row lg:flex-col gap-3">
               <motion.button
+                onClick={() => setIsEditing(true)}
                 whileHover={{
                   scale: 1.05,
                   boxShadow: "0 5px 15px rgba(99, 102, 241, 0.3)",
@@ -145,6 +133,17 @@ const ProfilePage = () => {
           </div>
         </motion.div>
       </motion.div>
+      {isEditing && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md relative">
+            <UpdateProfile
+              fetchProfile={fetchProfile}
+              closeEditModal={closeEditModal}
+              userData={userData}
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 };

@@ -9,6 +9,7 @@ import PageWithTitle from "../shared/PageWithTitle.jsx";
 import AuthGuard from "../shared/AuthGuard.jsx";
 import ErrorBoundary from "../shared/ErrorBoundary.jsx";
 import SignInAndSignUp from "../pages/CMS/Auth/SignInAndSignUp.jsx";
+import NotificationPage from "../pages/Notification/NotificationPage.jsx";
 
 const dashboardRoutes = {
   path: "/dashboard",
@@ -41,6 +42,15 @@ const dashboardRoutes = {
       path: "signin-signup",
       element: (
         <PageWithTitle Component={SignInAndSignUp} title="Auth || Page" />
+      ),
+    },
+    {
+      path: "notification",
+      element: (
+        <PageWithTitle
+          Component={NotificationPage}
+          title="Admin || Notification"
+        />
       ),
     },
     {

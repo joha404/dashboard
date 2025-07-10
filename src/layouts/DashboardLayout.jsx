@@ -4,13 +4,9 @@ import { useEffect, useState } from "react";
 import { HiOutlineCog, HiOutlineHome } from "react-icons/hi";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import Header from "../shared/Header.jsx";
-import { FaRegAddressCard, FaUsers } from "react-icons/fa";
-import { BiBookContent } from "react-icons/bi";
-import { TbListDetails } from "react-icons/tb";
+import { IoMdNotifications } from "react-icons/io";
+import { SiGnuprivacyguard } from "react-icons/si";
 import { MdOutlineVpnLock } from "react-icons/md";
-import { IoMdPricetags } from "react-icons/io";
-import { GrCircleInformation } from "react-icons/gr";
-import { RiUserCommunityFill } from "react-icons/ri";
 
 const links = [
   {
@@ -18,16 +14,12 @@ const links = [
     path: "/dashboard/landing-page",
     icon: <MdOutlineSpaceDashboard />,
   },
+
   {
-    name: "Settings",
-    path: "/dashboard/settings",
-    icon: <HiOutlineCog />,
+    name: "Notification ",
+    path: "/dashboard/notification",
+    icon: <IoMdNotifications />,
   },
-  // {
-  //   name: "AboutPage ",
-  //   path: "/dashboard/about",
-  //   icon: <TbListDetails />,
-  // },
   // {
   //   name: "Contact Page ",
   //   path: "/dashboard/contact",
@@ -37,7 +29,12 @@ const links = [
   {
     name: "Auth ",
     path: "/dashboard/signin-signup",
-    icon: <MdOutlineVpnLock />,
+    icon: <SiGnuprivacyguard />,
+  },
+  {
+    name: "Settings",
+    path: "/dashboard/settings",
+    icon: <HiOutlineCog />,
   },
 ];
 
