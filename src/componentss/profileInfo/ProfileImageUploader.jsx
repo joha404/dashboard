@@ -8,7 +8,7 @@ import { UpdateAvatar } from "../../api/auth";
 const placeholderImage =
   "https://static.vecteezy.com/system/resources/previews/036/594/092/non_2x/man-empty-avatar-photo-placeholder-for-social-networks-resumes-forums-and-dating-sites-male-and-female-no-photo-images-for-unfilled-user-profile-free-vector.jpg";
 
-const ProfileImageUploader = ({ userData }) => {
+const ProfileImageUploader = ({ userData, fetchProfile }) => {
   const [preview, setPreview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState(null);
@@ -29,8 +29,8 @@ const ProfileImageUploader = ({ userData }) => {
 
     try {
       setIsLoading(true);
-      const res = await UpdateAvatar(formData);
-      console.log(res);
+      await UpdateAvatar(formData);
+      await fetchProfile();
       toast.success("Profile image updated!");
       setFile(null);
       setPreview(null);

@@ -118,3 +118,73 @@ export const UpdateAvatar = async (data) => {
     };
   }
 };
+
+// Update Profile
+export const EditProfile = async (data) => {
+  try {
+    const response = await axiosInstance.put(`${BASE_URL}/users`, data, {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
+
+    if (response.status === 200 && response.data?.data) {
+      return {
+        status: true,
+        message: response.data.message || "Profile Updated Successfully",
+        data: response.data.data,
+      };
+    }
+
+    return {
+      status: false,
+      message: response.data?.message || "Failed to Update Profile",
+    };
+  } catch (error) {
+    console.error("Profile fetch error:", error);
+    return {
+      status: false,
+      message:
+        error.response?.data?.message ||
+        error.message ||
+        "Something went wrong. Please try again later.",
+    };
+  }
+};
+
+// Change Password
+export const UpdatePassword = async (data) => {
+  try {
+    const response = await axiosInstance.put(
+      `${BASE_URL}/users/change-password`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      }
+    );
+
+    if (response.status === 200 && response.data?.data) {
+      return {
+        status: true,
+        message: response.data.message || "Password Changes Successfully",
+        data: response.data.data,
+      };
+    }
+
+    return {
+      status: false,
+      message: response.data?.message || "Failed to Changed password",
+    };
+  } catch (error) {
+    console.error("Profile fetch error:", error);
+    return {
+      status: false,
+      message:
+        error.response?.data?.message ||
+        error.message ||
+        "Something went wrong. Please try again later.",
+    };
+  }
+};
